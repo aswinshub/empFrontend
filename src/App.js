@@ -7,6 +7,7 @@ import Login from './ui-component/Login';
 import Main from './ui-component/Main';
 import AdminHome from './elements/AdminHome';
 import Addemp from './elements/Addemp';
+import MainAdm from './ui-component/MainAdm';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
 
 <Routes>
 <Route path='/employee' element={<Main child={<Home/>}/>} />
-<Route path='/admin' element={<Main child={<AdminHome/>}/>} />
+<Route path='/admin' element={<MainAdm child={<AdminHome/>}/>} />
     
 <Route path="/empform" element={<Addemp/>} />
 

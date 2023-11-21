@@ -4,7 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 
-const Navbar = () => {
+const NavbarAdm = () => {
   return (
     <div>
       
@@ -16,8 +16,8 @@ const Navbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Employee
         </Typography>
-        <Button color="inherit"><Link style={{textDecoration:'none',color:'white'}} to={'/employee'}>Employee</Link></Button>
-   
+
+        <Button color="inherit"><Link style={{textDecoration:'none',color:'white'}} to={'/admin'}>Employee</Link></Button>
         <Button color="inherit"><Link style={{textDecoration:'none',color:'white'}} to={'/'}>Log Out</Link></Button>
 
       </Toolbar>
@@ -27,4 +27,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default NavbarAdm

@@ -4,9 +4,12 @@ import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import { Link } from 'react-router-dom';
+import Addemp from './Addemp';
+import NavbarAdm from './NavbarAdm';
 
 const AdminHome = () => {
-
+  var[update,setUpdate] = useState(false);
+  var[singleValue,setSingleValue]=useState([])
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -15,9 +18,22 @@ const AdminHome = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  function removeBlog(id){
+    axios.delete('http://localhost:4002/emp/remove/'+id).then((res)=>{
+      alert(res.data)
+      window.location.reload(false);
+    })
 
+  }
+  
 
-  return (
+  const updateBlog = (val)=>{
+    console.log("update clicked",val);
+    setUpdate(true);
+    setSingleValue(val)
+  }
+ 
+  let finalJSX=(
     
     <div style={{margin:"7%",textAlign:'right'}}>
       <Button variant="outlined" style={{textAlign:'center',alignContent:"center",justifyContent:'center'}}><Link to={'/empform'} style={{textDecoration:'none',color:'green'}} >Add New Employee</Link></Button>
@@ -49,8 +65,8 @@ const AdminHome = () => {
               <TableCell align="right">{val.email}</TableCell>
               <TableCell align="right">{val.position}</TableCell>
               <TableCell align="right">{val.location}</TableCell>
-              <TableCell align="right"><DeleteIcon style={{cursor:'pointer'}} /></TableCell>
-              <TableCell align="right"><SyncAltIcon  style={{cursor:'pointer'}}/></TableCell>
+              <TableCell align="right"><DeleteIcon  style={{cursor:'pointer'}}  onClick={()=>{removeBlog(val._id)}} /></TableCell>
+              <TableCell align="right"><SyncAltIcon  style={{cursor:'pointer'}} onClick={()=>updateBlog(val)}/></TableCell>
             </TableRow>
 
           ))}
@@ -61,7 +77,17 @@ const AdminHome = () => {
 
 
 </div>
+
   )
+  if(update) finalJSX=<Addemp method="put" data={singleValue}/>
+  return (
+   
+     
+      finalJSX
+      
+    
+     )
+       
 }
 
 export default AdminHome

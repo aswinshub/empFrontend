@@ -13,15 +13,18 @@ const Login = () => {
 
   function submitForm() {
     axios.post("http://localhost:4002/login/", form).then((res) => {
-      alert(res.data);
-      navigate("/admin");
+      alert(res.data.message);
+      if (res.data.message === "success") {
+        navigate("/admin");
+      }
+
     });
   }
-  
+
   return (
     <div style={{ margin: "10% 35%", textAlign: "center" }}>
       <Typography variant="h3" style={{ color: "Black" }}>
-      Employee Login
+        Employee Login
       </Typography>
       <br />
       <br />
@@ -30,8 +33,8 @@ const Login = () => {
         fullWidth
         label="Username"
         name="username"
-        onChange={(e)=>{
-          setForm({...form,name:e.target.value})
+        onChange={(e) => {
+          setForm({ ...form, name: e.target.value });
         }}
       />
       <br />
@@ -42,8 +45,8 @@ const Login = () => {
         label="Password"
         type="password"
         name="password"
-        onChange={(e)=>{
-          setForm({...form,password:e.target.value})
+        onChange={(e) => {
+          setForm({ ...form, password: e.target.value });
         }}
       />
       <br />
@@ -51,14 +54,13 @@ const Login = () => {
       <Button
         variant="contained"
         color="primary"
-     
-        fullWidth onClick={submitForm}
+        fullWidth
+        onClick={submitForm}
       >
         Login
       </Button>
       <br />
       <br />
-
     </div>
   );
 };
