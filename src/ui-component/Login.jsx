@@ -15,7 +15,12 @@ const Login = () => {
     axios.post("http://localhost:4002/login/", form).then((res) => {
       alert(res.data.message);
       if (res.data.message === "success") {
-        navigate("/admin");
+        if (form.name === 'admin') {
+          navigate('/admin');
+        } else {
+          navigate('/employee');
+        }
+
       }
 
     });
