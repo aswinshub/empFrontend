@@ -6,20 +6,21 @@ import SyncAltIcon from '@mui/icons-material/SyncAlt';
 import { Link } from 'react-router-dom';
 import Addemp from './Addemp';
 import NavbarAdm from './NavbarAdm';
+import axiosInstance from './axiosinterceptor';
 
 const AdminHome = () => {
   var[update,setUpdate] = useState(false);
   var[singleValue,setSingleValue]=useState([])
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
+    axiosInstance
       .get("http://localhost:4002/emp/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
   }, []);
 
   function removeBlog(id){
-    axios.delete('http://localhost:4002/emp/remove/'+id).then((res)=>{
+    axiosInstance.delete('http://localhost:4002/emp/remove/'+id).then((res)=>{
       alert(res.data)
       window.location.reload(false);
     })

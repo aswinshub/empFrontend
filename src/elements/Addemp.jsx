@@ -2,6 +2,7 @@ import { Box, Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axiosInstance from "./axiosinterceptor";
 
 const Addemp = (props) => {
   const [form, setForm] = useState({
@@ -18,7 +19,7 @@ const Addemp = (props) => {
   const navigate = useNavigate();
   function submitform(){
     if(props.method==="put"){
-      axios.put("http://localhost:4002/emp/edit/"+props.data._id,form)
+      axiosInstance.put("http://localhost:4002/emp/edit/"+props.data._id,form)
       .then((response)=>{
        
         if (response.data==="Updated successfully") {
@@ -31,7 +32,7 @@ const Addemp = (props) => {
         }
       })}
       else{
-      axios.post('http://localhost:4002/emp/add',form).then((res)=>{
+      axiosInstance.post('http://localhost:4002/emp/add',form).then((res)=>{
         alert(res.data);
      
       })}
