@@ -1,35 +1,40 @@
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
-import { Route, Routes } from 'react-router-dom';
-import './App.css';
-
-import Home from './elements/Home';
-import Login from './ui-component/Login';
-import Main from './ui-component/Main';
-import AdminHome from './elements/AdminHome';
-import Addemp from './elements/Addemp';
-import MainAdm from './ui-component/MainAdm';
-
+import Home from "./elements/Home";
+import Login from "./ui-component/Login";
+import Main from "./ui-component/Main";
+import AdminHome from "./elements/AdminHome";
+import Addemp from "./elements/Addemp";
+import MainAdm from "./ui-component/MainAdm";
+import { Logout } from "./Logout";
+import { RequireAuth } from "./Auth";
 
 function App() {
   return (
     <div className="App">
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route
+          path="/employee"
+          element={
+            <RequireAuth>
+              <Main child={<Home />} />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth>
+              <MainAdm child={<AdminHome />} />
+            </RequireAuth>
+          }
+        />
 
-<Routes>
-<Route path='/employee' element={<Main child={<Home/>}/>} />
-<Route path='/admin' element={<MainAdm child={<AdminHome/>}/>} />
-    
-<Route path="/empform" element={<Addemp/>} />
-
-
-
-<Route path='/' element={<Login/>}  />
-
-
-
-</Routes>
-
-
-
+        <Route path="/empform" element={<Addemp />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes>
     </div>
   );
 }

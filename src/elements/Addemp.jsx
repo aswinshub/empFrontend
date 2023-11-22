@@ -38,7 +38,11 @@ const Addemp = (props) => {
   navigate("/admin");
   }
  
+function cancel(){
 
+  navigate("/admin");
+
+}
 
 
 
@@ -112,6 +116,14 @@ const Addemp = (props) => {
         >
       
           Save 
+        </Button> &nbsp;
+        <Button
+          size="large"
+          variant="outlined" color="error"
+          onClick={cancel}
+        >
+      
+          Cancel 
         </Button>
       </Box>
     </div>
