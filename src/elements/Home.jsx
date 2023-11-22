@@ -1,14 +1,14 @@
 
 
-import { Button, Card, CardActions, CardContent, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
-import axios from 'axios';
+import { Card, CardContent, Grid, Typography } from '@mui/material';
+import axiosInstance from './axiosinterceptor'
 import { useEffect, useState } from 'react';
 
 const Home = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    axios
+    axiosInstance
       .get("http://localhost:4002/emp/")
       .then((res) => setData(res.data))
       .catch((err) => console.log(err));
