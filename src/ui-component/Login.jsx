@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [form, setForm] = useState({
-    name: "",
+    email: "",
     password: "",
   });
 
@@ -15,7 +15,9 @@ const Login = () => {
     axios.post("http://localhost:4002/login/", form).then((res) => {
       alert(res.data.message);
       if (res.data.message === "success") {
-        if (form.name === 'admin') {
+        sessionStorage.setItem("userToken", res.data.token);
+
+        if (form.email === 'admin') {
           navigate('/admin');
         } else {
           navigate('/employee');
@@ -23,7 +25,16 @@ const Login = () => {
 
       }
 
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 401) {
+        alert('Invalid credentials. Please try again.');
+      } else {
+        console.error('Error during login:', error);
+        alert('An error occurred. Please try again later.');
+      }
     });
+
   }
 
   return (
@@ -39,7 +50,7 @@ const Login = () => {
         label="Username"
         name="username"
         onChange={(e) => {
-          setForm({ ...form, name: e.target.value });
+          setForm({ ...form, email: e.target.value });
         }}
       />
       <br />
